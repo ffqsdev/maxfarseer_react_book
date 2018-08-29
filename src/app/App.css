@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+}
+
+.news-item {
+    text-align: left;
+    margin-bottom: 8px;
+    background-color: #bcbbc5;
+    padding: 4px 16px;
+
+}
+.news-item .name {
+    font-size: 700;
+}
