@@ -5,12 +5,44 @@ import Timer from '../components/timer/Timer'
 import News from '../components/news/News'
 import Add from '../components/add/Add'
 
-import myNews from '../data/newsData'
-
 
 class App extends Component {
     state = {
-        news: myNews
+        news: null,
+        isLoading: true
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        let nextFilteredNews
+
+        if(Array.isArray(state.news)) {
+            nextFilteredNews = [...state.news]
+
+            nextFilteredNews.forEach((item, index) => {
+                if(item.bigText.toLowerCase().indexOf("pubg") !== 1) {
+                    item.bigText = "SPAM"
+                }
+            })
+
+            return {news: nextFilteredNews}
+        }
+
+        return null
+    }
+
+    componentDidMount() {
+        setTimeout(() => {
+            fetch('/data/newsData.json')
+                .then(response => {
+                    return response.json()
+                })
+                .then(data => {
+                    this.setState({news: data, isLoading: false})
+                })
+                .catch((error) => {
+                    this.setState({isLoading: false})
+                })
+            }, 2000)
     }
 
     addNews = (data) => {
@@ -19,12 +51,14 @@ class App extends Component {
     }
 
     render() {
+        const {news, isLoading} = this.state
         return (
             <div className="App">
                 <Timer/>
                 <Add addFunc={this.addNews}/>
                 <h2>News:</h2>
-                <News data={this.state.news}/>
+                {isLoading && <p>Loading...</p>}
+                {Array.isArray(news) && <News data={news}/>}
             </div>
         )
     }

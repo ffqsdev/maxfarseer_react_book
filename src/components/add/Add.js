@@ -12,6 +12,7 @@ class Add extends Component {
     }
 
     addNewsItem = (e) => {
+        e.preventDefault()
         const {author, text, bigText} = this.state.form
         const id = +new Date()
         this.props.addFunc({id, author, text, bigText})
@@ -48,7 +49,7 @@ class Add extends Component {
                 <p>Text: <textarea id="text" onChange={this.changeText} value={text}></textarea></p>
                 <p>Big Text: <textarea id="bigText" onChange={this.changeText} value={bigText}></textarea></p>
                 <p>Confirm rules: <input onChange={this.changeConfirm} type="checkbox"/></p>
-                <button onClick={this.addNewsItem} disabled={!this.validate()}>alert input</button>
+                <button onClick={this.addNewsItem} disabled={!this.validate()}>add news</button>
             </form>
         )
     }
