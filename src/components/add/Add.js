@@ -44,11 +44,19 @@ class Add extends Component {
         const {author, text, bigText} = this.state.form
 
         return (
-            <form>
-                <p>Author: <input id="author" onChange={this.changeText} type="text" value={author}/></p>
-                <p>Text: <textarea id="text" onChange={this.changeText} value={text}></textarea></p>
-                <p>Big Text: <textarea id="bigText" onChange={this.changeText} value={bigText}></textarea></p>
-                <p>Confirm rules: <input onChange={this.changeConfirm} type="checkbox"/></p>
+            <form className="add__form">
+                <p>
+                    <span className="label">Author: </span>
+                    <input id="author" onChange={this.changeText} type="text" value={author}/></p>
+                <p>
+                    <span className="label">Text: </span>
+                    <textarea id="text" onChange={this.changeText} value={text}></textarea></p>
+                <p>
+                    <span className="label">Big Text: </span>
+                    <textarea id="bigText" onChange={this.changeText} value={bigText}></textarea></p>
+                <p>
+                    <span className="label">Confirm rules: </span>
+                    <input onChange={this.changeConfirm} type="checkbox"/></p>
                 <button onClick={this.addNewsItem} disabled={!this.validate()}>add news</button>
             </form>
         )

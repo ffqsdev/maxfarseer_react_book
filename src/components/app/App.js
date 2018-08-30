@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
+
+import News from '../../components/news/News'
+import Add from '../../components/add/Add'
+import PageContainer from '../../containers/PageContainer'
+import UserContainer from '../../containers/UserContainer'
+
 import './App.css'
 
-import Timer from '../components/timer/Timer'
-import News from '../components/news/News'
-import Add from '../components/add/Add'
 
-
-class App extends Component {
+export default class App extends Component {
     state = {
         news: null,
         isLoading: true
@@ -52,9 +54,13 @@ class App extends Component {
 
     render() {
         const {news, isLoading} = this.state
+
         return (
             <div className="App">
-                <Timer/>
+                <UserContainer/>
+                <PageContainer/>
+
+                <h2>Create new News</h2>
                 <Add addFunc={this.addNews}/>
                 <h2>News:</h2>
                 {isLoading && <p>Loading...</p>}
@@ -63,5 +69,3 @@ class App extends Component {
         )
     }
 }
-
-export default App
